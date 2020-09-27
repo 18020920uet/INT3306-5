@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blank Page</title>
+  </head>
+  <body>
+    <form>
+      <input type="button" value="Change Me" onclick="changeColor()" />
+    </form>
+    <script>
+      var change = false;
+      function changeColor() {
+        if (change == false) {
+          document.bgColor = "blue";
+          change = true;
+        } else {
+          document.bgColor = "white";
+          change = false;
+        }
+      }
+    </script>
+  </body>
+</html>

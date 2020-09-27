@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blank Page</title>
+  </head>
+  <body>
+    <img
+      src="https://www.google.com/logos/doodles/2020/googles-22nd-birthday-6753651837108550-2xa.gif"
+      width="600"
+      onclick="newWindow()"
+    />
+    <br />
+    <form>
+      <button>
+        <label onclick="closeWindow()"> Close </label>
+      </button>
+    </form>
+
+    <script>
+      var myWindow;
+      function newWindow() {
+        myWindow = window.open(
+          "https://www.google.com.vn",
+          "myWindow",
+          "width=500,height=500"
+        );
+      }
+      function closeWindow() {
+        if (myWindow) {
+          myWindow.close();
+        }
+      }
+    </script>
+  </body>
+</html>
