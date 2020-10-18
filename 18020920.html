@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <style>
+    span.require {
+      color: red;
+    }
+    .myCenter {
+      display: flex; align-items: center;justify-content: center;
+    }
+
+  </style>
+  <body>
+    <div class="myCenter">
+      <form id="form"  action="">
+        <fieldset>
+          <legend>Form:</legend>
+          <div>
+            <label class="" onclick="input('fullName')">Họ và tên</label>
+            <input
+              type="text"
+              id="fullName"
+              onkeyup="handleKeyUp(event, this,'email')"
+              style="background-color: cyan"
+              onblur="checkRequire('fullName')"
+            />
+            <span id="fullNameRequire" class="require"></span>
+            <br />
+          </div>
+          <div>
+            <label class="" onclick="input('email')">Email:</label>text
+            <input
+              type="text"
+              id="email"
+              name="email"
+              onkeyup="handleKeyUp(event, this,'birthOfDate')"
+              style="background-color: cyan"
+              onblur="checkRequire('email')"
+            />
+            <span id="emailRequire" class="require"></span>
+
+            <br />
+          </div>
+          <div>
+            <label class="" onclick="input('birthOfDate') ">Ngày sinh:</label>
+            <input
+              type="date"
+              id="birthOfDate"
+              name="birthOfDate"
+              onkeyup="handleKeyUp(event, this,'address')"
+              style="background-color: cyan"
+              onblur="checkRequire('birthOfDate')"
+            />
+            <span id="birthOfDateRequire" class="require"></span>
+
+            <br />
+          </div>
+          <div>
+            <label class="" onclick="input('address')">Địa chỉ nhà:</label>
+            <input
+              type="text"myCenter
+              id="address"
+              name="address"
+              onkeyup="handleKeyUp(event, this,'phone')"
+              style="background-color: gray"
+            />
+            <br />
+          </div>
+          <div>
+            <label class="" onclick="input('phone')">Số điện thoại:</label>
+            <input
+              type="number"
+              id="phone"
+              name="phone"
+              onkeyup="handleKeyUp(event, this,'male')"
+              style="background-color: gray"
+            />
+            <br />
+          </div>
+          <div>
+            <label class="" onclick="input('male')"> Giới tính:</label>
+            <label class="radio-container">
+              <input
+                type="radio"
+                id="male"
+                name="gender"
+                checked="checked"
+                value="male"
+                onkeyup="handleKeyUp(event, this,'displayName')"
+              />
+              Nam
+            </label>
+
+            <label class="radio-container">
+              <input
+                type="radio"
+                id="female"
+                name="gender"
+                value="female"
+                onkeyup="handleKeyUp(event, this,'displayName')"
+              />
+              Nữ
+            </label>
+            <br />
+          </div>
+          <div>
+            <label class="" onclick="input('displayName')"
+              >Tên đăng nhập:</label
+            >
+            <input
+              type="text"
+              id="displayName"
+              name="displayName"
+              onkeyup="handleKeyUp(event, this,'password')"
+              style="background-color: cyan"
+              onblur="checkRequire('displayName')"
+            />
+            <span id="displayNameRequire" class="require"></span>
+
+            <br />
+          </div>
+          <div>
+            <label class="" onclick="input('password')">Mật khẩu:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              onkeyup="handleKeyUp(event, this,'passwordCheck')"
+              style="background-color: cyan"
+              onblur="checkRequire('password')"
+            />
+            <span id="passwordRequire" class="require"></span>
+
+            <br />
+          </div>
+          <div>
+            <label class="" onclick="input('passwordCheck')">
+              Nhập lại mật khẩu:</label
+            >
+            <input
+              type="password"
+              id="passwordCheck"
+              name="passwordCheck"
+              onkeyup="handleKeyUp(event, this,'button')"
+              style="background-color: cyan"
+              onblur="checkRequire('passwordCheck')"
+            />
+            <span id="passwordCheckRequire" class="require"></span>
+            <br />
+          </div>
+          <div class="myCenter">
+            <label></label>
+            <input id="button" type="button" onclick="onSubmit()" value="Submit" />
+            <input id="clear" type="button" onclick="ClearForm()" value="Clear" />
+        </fieldset>
+      </form>
+    </div>
+
+    <script>
+      function handleKeyUp(e, myself, nextLabel) {
+        if (window.event) {
+          e = window.event;
+        }
+        if (nextLabel == "password") {
+          let displayName = document.getElementById("displayName").value;
+          if (displayName == "admin") {
+            document.getElementById(`displayNameRequire`).textContent =
+              "Exists";
+          } else {
+            document.getElementById(`displayNameRequire`).textContent = "";
+            if (e.keyCode == 13) {
+              document.getElementById(nextLabel).focus();
+            }
+          }
+        } else if (nextLabel == "passwordCheck") {
+          let password = document.getElementById("password").value;
+        } else if (nextLabel == "button") {
+          let password = document.getElementById("password").value;
+          let passwordCheck = document.getElementById("passwordCheck").value;
+          if (passwordCheck == password) {
+            document.getElementById(`passwordCheckRequire`).textContent = "";
+            if (e.keyCode == 13) {
+              document.getElementById(nextLabel).focus();
+            }
+          } else {
+            document.getElementById(`passwordCheckRequire`).textContent =
+              "Wrong password";
+          }
+        } else {
+          if (e.keyCode == 13) {
+            document.getElementById(nextLabel).focus();
+          }
+        }
+      }
+
+      function input(input) {
+        document.getElementById(input).focus();
+      }
+      function ClearForm() {
+        document.getElementById("form").reset();  
+      }
+      
+      function checkRequire(input) {
+        switch (input) {
+          case "fullName":
+          case "email":
+          case "password":
+          case "displayName":
+          case "passwordCheck": {
+            if (document.getElementById(input).value == "") {
+              document.getElementById(`${input}Require`).textContent =
+                "Require";
+              break;
+            } else {
+              document.getElementById(`${input}Require`).textContent = "";
+              break;
+            }
+          }
+          case "birthOfDate": {
+            if (document.getElementById(input).value == "") {
+              document.getElementById(`${input}Require`).textContent =
+                "Require";
+              break;
+            } else {
+              document.getElementById(`${input}Require`).textContent = "";
+              break;
+            }
+          }
+        }
+      }
+
+      function onSubmit() {
+        window.alert("OK");
+      }
+    </script>
+  </body>
+</html>
